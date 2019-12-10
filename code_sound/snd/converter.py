@@ -27,6 +27,10 @@ class Sequencer(AudioEffectsChain):
         self.command.extend(["synth", duration, form, note])
         return self
 
+    def fade(self, fade_shape='q', fade_in_len=0.0, fade_stop=0.0, fade_out_len=0.0):
+        self.command.extend(["fade", fade_shape, fade_in_len, fade_stop, fade_out_len])
+        return self
+
     def __call__(
         self,
         src,
