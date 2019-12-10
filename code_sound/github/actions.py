@@ -1,18 +1,40 @@
+import io
+import json
 import os
-import sys
+import subprocess
 
 from code_sound.parser.ast import parse
 from code_sound.snd.converter import play
 from code_sound.snd.models import types_to_sound
 
 
-def run_action():
+def get_event_data():
     with open(os.environ["GITHUB_EVENT_PATH"]) as fp:
-        print(f"::warning {fp.read()}")
-    with open(sys.argv[1]) as fp:
-        data = fp.read()
+        return json.load(fp)
 
-    types = list(parse(data))
+
+def run_action():
+    event_data = get_event_data()
+
+    after = event_data["after"]
+    before = event_data["before"]
+
+    output = subprocess.check_output(["git", "diff", "--name-only", before, after])
+    files = output.decode().splitlines()
+
+    buffer = io.StringIO()
+    for file in files:
+        if file.endswith(".py"):
+            with open(file) as fp:
+                buffer.write(fp.read())
+            buffer.write("\n\n\n")
+
+    if buffer.tell() > 0:
+        buffer.seek(0)
+    else:
+        return
+
+    types = list(parse(buffer.read()))
     sounds = list(types_to_sound(types))
     play(sounds, "/tmp/outfile.ogg")
     print("::warning Created audio sample")
