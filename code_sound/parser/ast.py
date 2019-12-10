@@ -19,8 +19,6 @@ def parse(content: str) -> Generator[BaseType, None, None]:
             next_type = If()
         elif isinstance(node, ast.While):
             next_type = While()
-        elif isinstance(node, ast.stmt):
-            next_type = Statement()
         elif isinstance(node, ast.Call):
             next_type = Call()
         elif isinstance(node, ast.Name):
@@ -33,6 +31,8 @@ def parse(content: str) -> Generator[BaseType, None, None]:
             next_type = Tuple()
         elif isinstance(node, ast.expr):
             next_type = Expression()
+        elif isinstance(node, ast.stmt):
+            next_type = Statement()
 
         if current_type is None:
             current_type = next_type
