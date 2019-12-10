@@ -7,9 +7,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      # - name: Does this change sound good?
+      #   id: code_sound
+      #   uses: MarkusH/code-sound@4c16b1f7e865a6e7ac5cb18b6a3eed8cd805d717
       - name: Does this change sound good?
         id: code_sound
-        uses: MarkusH/code-sound@4c16b1f7e865a6e7ac5cb18b6a3eed8cd805d717
+        uses: ./
+      - shell: bash
+        run: |
+          ls -laR /home/runner/work/code-sound/code-sound
       - uses: actions/upload-artifact@v1
         with:
           name: code-sound.ogg
