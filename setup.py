@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-from pkg_resources.extern.packaging.version import Version
 from setuptools import find_packages, setup
-
 
 setup(
     name="code_sound",
@@ -14,6 +12,11 @@ setup(
     install_requires=[
         "pysndfx==0.3.6",
     ],
+    entry_points={
+        "console_scripts": [
+            "run-action = code_sound.github.actions:run_action",
+        ]
+    },
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
