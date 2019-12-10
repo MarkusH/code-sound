@@ -1,0 +1,6 @@
+name: "CodeSound"
+description: "Does this code sound good?"
+outputs:
+runs:
+  using: "docker"
+  image: "Dockerfile"
