@@ -2,7 +2,7 @@ import ast
 from typing import Generator
 
 
-def parse(content: str) -> Generator[ast.stmt, None, None]:
+def parse(content: str) -> Generator[ast.AST, None, None]:
     tree = ast.parse(content)
     current_type = None
     next_type = None
@@ -12,6 +12,6 @@ def parse(content: str) -> Generator[ast.stmt, None, None]:
         if current_type is None:
             current_type = next_type
 
-        if current_type.__class__ != next_type.__class__:
+        if type(current_type) != type(next_type):
             yield current_type
             current_type = next_type

@@ -23,7 +23,7 @@ class Sound:
         return fx
 
 
-def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, None]:
+def types_to_sound(code_types: Iterable[ast.AST]) -> Generator[Sound, None, None]:
     duration = 0.125
     sample = "sin"
     for code_type in code_types:
