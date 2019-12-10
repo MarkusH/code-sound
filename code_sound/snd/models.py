@@ -27,7 +27,6 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
     duration = 0.125
     sample = "sin"
     for code_type in code_types:
-        print(code_type)
         if isinstance(code_type, ast.Module):
             yield Sound(
                 Effect("synth", duration, sample, "D3"), Effect("fade", 0.01, 0, 0.1)
