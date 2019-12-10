@@ -1,3 +1,4 @@
+import os
 import sys
 
 from code_sound.parser.ast import parse
@@ -6,6 +7,7 @@ from code_sound.snd.models import types_to_sound
 
 
 def run_action():
+    print(f"::warning {os.environ}")
     with open(sys.argv[1]) as fp:
         data = fp.read()
 
