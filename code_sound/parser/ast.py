@@ -1,6 +1,5 @@
 import ast
-from typing import Generator, List
-import logging
+from typing import Generator
 
 from .types import BaseType, Expression, Module, Statement, Assign, For, If, While, Call, Name, Num, Attribute, Tuple
 
