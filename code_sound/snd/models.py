@@ -31,21 +31,15 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
             yield Sound(
                 Effect("synth", duration, sample, "D3"), Effect("fade", 0.01, 0, 0.1)
             )
-        elif isinstance(code_type, ast.stmt):
-            yield Sound(
-                Effect("synth", duration, sample, "Bb3"), Effect("fade", 0.01, 0, 0.1)
-            )
-        elif isinstance(code_type, ast.Expression):
-            yield Sound(
-                Effect("synth", duration, sample, "C3"), Effect("fade", 0.01, 0, 0.1)
-            )
         elif isinstance(code_type, ast.Assign):
             yield Sound(
                 Effect("synth", duration, sample, "Db3"), Effect("fade", 0.01, 0, 0.1)
             )
         elif isinstance(code_type, ast.If):
             yield Sound(
-                Effect("synth", duration, sample, "Eb3"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration * 1.25, sample, "Eb3"),
+                Effect("synth", duration * 1.25, sample, "Eb3-B2"),
+                Effect("fade", 0.01, 0, 0.1),
             )
         elif isinstance(code_type, ast.While):
             yield Sound(
@@ -53,7 +47,7 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
             )
         elif isinstance(code_type, ast.For):
             yield Sound(
-                Effect("synth", duration, sample, "F3"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration, sample, "F3"), Effect("fade", 0.01, 0, 0.1),
             )
         elif isinstance(code_type, ast.Name):
             yield Sound(
@@ -85,5 +79,7 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
             )
         elif isinstance(code_type, ast.stmt):
             yield Sound(
-                Effect("synth", duration, sample, "E2"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration * 1.5, sample, "Bb3"),
+                Effect("synth", duration * 1.5, sample, "Bb3-D4"),
+                Effect("fade", 0.01, 0, 0.1),
             )
