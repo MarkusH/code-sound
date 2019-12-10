@@ -13,9 +13,6 @@ jobs:
       - name: Does this change sound good?
         id: code_sound
         uses: ./
-      - shell: bash
-        run: |
-          ls -laR /home/runner/work/code-sound/code-sound
       - uses: actions/upload-artifact@v1
         with:
           name: code-sound.ogg
