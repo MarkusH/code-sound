@@ -7,7 +7,8 @@ from code_sound.snd.models import types_to_sound
 
 
 def run_action():
-    print(f"::warning {os.environ}")
+    with open(os.environ["GITHUB_EVENT_PATH"]) as fp:
+        print(f"::warning {fp.read()}")
     with open(sys.argv[1]) as fp:
         data = fp.read()
 
