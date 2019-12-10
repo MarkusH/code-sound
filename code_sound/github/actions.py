@@ -36,5 +36,6 @@ def run_action():
 
     types = list(parse(buffer.read()))
     sounds = list(types_to_sound(types))
-    play(sounds, "/tmp/outfile.ogg")
+    os.makedirs(".code_sound", exist_ok=True)
+    play(sounds, ".code_sound/outfile.ogg")
     print("::warning Created audio sample")
