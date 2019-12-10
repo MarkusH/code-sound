@@ -5,9 +5,16 @@ from typing import Iterable
 
 import numpy as np
 from pysndfx import AudioEffectsChain
-from pysndfx.sndfiles import (FileBufferInput, FileBufferOutput, FilePathInput,
-                              FilePathOutput, NumpyArrayInput,
-                              NumpyArrayOutput, SoxInput, logger)
+from pysndfx.sndfiles import (
+    FileBufferInput,
+    FileBufferOutput,
+    FilePathInput,
+    FilePathOutput,
+    NumpyArrayInput,
+    NumpyArrayOutput,
+    SoxInput,
+    logger,
+)
 
 from .models import Sound
 
@@ -27,7 +34,7 @@ class Sequencer(AudioEffectsChain):
         self.command.extend(["synth", duration, form, note])
         return self
 
-    def fade(self, fade_shape='q', fade_in_len=0.0, fade_stop=0.0, fade_out_len=0.0):
+    def fade(self, fade_shape="q", fade_in_len=0.0, fade_stop=0.0, fade_out_len=0.0):
         self.command.extend(["fade", fade_shape, fade_in_len, fade_stop, fade_out_len])
         return self
 

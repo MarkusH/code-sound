@@ -9,13 +9,9 @@ setup(
     url="https://github.com/MarkusH/code-sound",
     version="0.0.1",
     packages=find_packages(),
-    install_requires=[
-        "pysndfx==0.3.6",
-    ],
+    install_requires=["pysndfx==0.3.6",],
     entry_points={
-        "console_scripts": [
-            "run-action = code_sound.github.actions:run_action",
-        ]
+        "console_scripts": ["run-action = code_sound.github.actions:run_action",]
     },
     python_requires=">=3.6",
     classifiers=[
