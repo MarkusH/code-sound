@@ -1,14 +1,22 @@
-on: [push,pull_request]
+on: [push, pull_request]
 
 jobs:
   sounds_good:
     runs-on: ubuntu-latest
     name: Does this change sound good?
     steps:
-    # To use this repository's private action, you must check out the repository
-    - name: Checkout
-      uses: actions/checkout@v1
-    - uses: ./ # Uses an action in the root directory
-    - name: Does this change sound good?
-      id: code_sound
-      uses: MarkusH/code-sound@e1c2ad4e974b8c034bb5dc1119145e2bf8811fe3
+      - name: Checkout
+        uses: actions/checkout@v1
+      # - name: Does this change sound good?
+      #   id: code_sound
+      #   uses: MarkusH/code-sound@4c16b1f7e865a6e7ac5cb18b6a3eed8cd805d717
+      - name: Does this change sound good?
+        id: code_sound
+        uses: ./
+      - shell: bash
+        run: |
+          ls -laR /home/runner/work/code-sound/code-sound
+      - uses: actions/upload-artifact@v1
+        with:
+          name: code-sound.ogg
+          path: .code_sound/outfile.ogg
