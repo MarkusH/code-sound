@@ -1,4 +1,5 @@
 *.egg-info
+.code_sound
 .venv
 __pycache__
 dist

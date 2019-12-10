@@ -24,7 +24,7 @@ def run_action():
 
     buffer = io.StringIO()
     for file in files:
-        if file.endswith(".py"):
+        if file.endswith(".py") and os.path.exists(file):
             with open(file) as fp:
                 buffer.write(fp.read())
             buffer.write("\n\n\n")
