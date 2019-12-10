@@ -24,7 +24,7 @@ class Sound:
 
 
 def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, None]:
-    duration = 0.2
+    duration = 0.125
     sample = "sin"
     for code_type in code_types:
         print(code_type)
@@ -33,7 +33,9 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
                 Effect("synth", duration, sample, "D3"), Effect("fade", 0.01, 0, 0.1)
             )
         elif isinstance(code_type, ast.stmt):
-            yield Sound(Effect("synth", duration, sample, "Bb3"))
+            yield Sound(
+                Effect("synth", duration, sample, "Bb3"), Effect("fade", 0.01, 0, 0.1)
+            )
         elif isinstance(code_type, ast.Expression):
             yield Sound(
                 Effect("synth", duration, sample, "C3"), Effect("fade", 0.01, 0, 0.1)
@@ -72,17 +74,17 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
             )
         elif isinstance(code_type, ast.FunctionDef):
             yield Sound(
-                Effect("synth", duration, "pl", "Bb3"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration, sample, "Bb3"), Effect("fade", 0.01, 0, 0.1)
             )
         elif isinstance(code_type, ast.Import):
             yield Sound(
-                Effect("synth", duration, "pl", "G2"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration, sample, "G2"), Effect("fade", 0.01, 0, 0.1)
             )
         elif isinstance(code_type, ast.Expr):
             yield Sound(
-                Effect("synth", duration, "pl", "F2"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration, sample, "F2"), Effect("fade", 0.01, 0, 0.1)
             )
         elif isinstance(code_type, ast.stmt):
             yield Sound(
-                Effect("synth", duration, "pl", "E2"), Effect("fade", 0.01, 0, 0.1)
+                Effect("synth", duration, sample, "E2"), Effect("fade", 0.01, 0, 0.1)
             )
