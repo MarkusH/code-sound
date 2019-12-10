@@ -29,7 +29,6 @@ class Sound:
 def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, None]:
     duration = 0.2
     for code_type in code_types:
-        print(code_type)
         if isinstance(code_type, ast.Module):
             yield Sound(Effect("synth", duration, "pl", "D2"), Effect("reverb"))
         elif isinstance(code_type, ast.Assign):
@@ -72,10 +71,16 @@ def types_to_sound(code_types: Iterable[ast.stmt]) -> Generator[Sound, None, Non
                 Effect("synth", duration, "pl", "G2"),
                 Effect("reverb")
             )
-        elif isinstance(code_type, ast.stmt):
-            yield Sound(Effect("synth", duration, "pl", "E2"))
-        elif isinstance(code_type, ast.Expression):
+        elif isinstance(code_type, ast.FunctionDef):
+            yield Sound(Effect("synth", duration, "pl", "Bb3"))
+        elif isinstance(code_type, ast.Import):
+            yield Sound(Effect("synth", duration, "pl", "G2"))
+        elif isinstance(code_type, ast.Expr):
             yield Sound(
                 Effect("synth", duration, "pl", "F2"),
-                Effect("reverb")
+                Effect("reverb"),
+                Effect("gain", 0)
             )
+        elif isinstance(code_type, ast.stmt):
+            yield Sound(Effect("synth", duration, "pl", "E2"))
+
