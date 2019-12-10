@@ -20,6 +20,7 @@ def find_files():
     after = event_data["after"]
     before = event_data["before"]
 
+    print(f"Checking for files between {before} and {after}.")
     output = subprocess.check_output(["git", "diff", "--name-only", before, after])
     files = output.decode().splitlines()
 
@@ -47,5 +48,10 @@ def run(files: List[str], out=None):
 
 def run_action():
     os.makedirs(".code_sound", exist_ok=True)
-    run(find_files(), ".code_sound/outfile.ogg")
-    print("::warning Created audio sample")
+    files = list(find_files())
+    if not files:
+        print("No Python files modified.")
+    else:
+        print(f"Building sound over these files: {', '.join(files)}")
+        run(files, ".code_sound/outfile.ogg")
+        print("Created audio sample.")
