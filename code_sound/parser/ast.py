@@ -6,35 +6,33 @@ from .types import BaseType, Expression, Module, Statement, Assign, For, If, Whi
 
 def parse(content: str) -> Generator[BaseType, None, None]:
     tree = ast.parse(content)
-    position = 0
     current_type = None
     next_type = None
-    result = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Module):
-            next_type = Module(position)
+            next_type = Module()
         elif isinstance(node, ast.Assign):
-            next_type = Assign(position)
+            next_type = Assign()
         elif isinstance(node, ast.For):
-            next_type = For(position)
+            next_type = For()
         elif isinstance(node, ast.If):
-            next_type = If(position)
+            next_type = If()
         elif isinstance(node, ast.While):
-            next_type = While(position)
+            next_type = While()
         elif isinstance(node, ast.stmt):
-            next_type = Statement(position)
+            next_type = Statement()
         elif isinstance(node, ast.Call):
-            next_type = Call(position)
+            next_type = Call()
         elif isinstance(node, ast.Name):
-            next_type = Name(position)
+            next_type = Name()
         elif isinstance(node, ast.Num):
-            next_type = Num(position)
+            next_type = Num()
         elif isinstance(node, ast.Attribute):
-            next_type = Attribute(position)
+            next_type = Attribute()
         elif isinstance(node, ast.Tuple):
-            next_type = Tuple(position)
+            next_type = Tuple()
         elif isinstance(node, ast.expr):
-            next_type = Expression(position)
+            next_type = Expression()
 
         if current_type is None:
             current_type = next_type

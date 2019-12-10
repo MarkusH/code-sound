@@ -2,8 +2,7 @@ import abc
 
 
 class BaseType(abc.ABC):
-    def __init__(self, position):
-        self.position = position
+    pass
 
 
 class Expression(BaseType):
