@@ -5,7 +5,7 @@ import logging
 from .types import BaseType, Expression, Module, Statement, Assign, For, If, While, Call, Name, Num, Attribute, Tuple
 
 
-def parse(content: str) -> List[BaseType]:
+def parse(content: str) -> Generator[BaseType, None, None]:
     tree = ast.parse(content)
     position = 0
     current_type = None
@@ -41,7 +41,6 @@ def parse(content: str) -> List[BaseType]:
             current_type = next_type
 
         if current_type.__class__ != next_type.__class__:
-            result.append(current_type)
+            yield current_type
             current_type = next_type
 
-    return result
